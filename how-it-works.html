@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content="width=device-width,initial-scale=1" >
+<title>How it works · Pathways to Family Success</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" >
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" >
+<style>
+  :root {
+    --cream: #FAF1DF;
+    --off-white: #fcfbf8;
+    --charcoal: #1c1c1c;
+    --muted: #5f5f5d;
+    --hairline: #ECE3CE;
+    --accent: #DC6B3F;
+    --accent-deep: #B95527;
+    --interactive-border: rgba(28, 28, 28, 0.4);
+    --hover-tint: rgba(28, 28, 28, 0.04);
+    --focus-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    --inset-shadow:
+      rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset,
+      rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset,
+      rgba(0,0,0,0.05) 0px 1px 2px 0px;
+
+    --sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --display: 'Newsreader', Georgia, serif;
+
+    --fg-2: rgba(28, 28, 28, 0.82);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.50;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    position: relative;
+  }
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 820px;
+    background:
+      radial-gradient(60% 40% at 15% 30%, rgba(255, 198, 174, 0.35), transparent 70%),
+      radial-gradient(50% 40% at 85% 35%, rgba(232, 196, 218, 0.30), transparent 70%),
+      radial-gradient(40% 30% at 65% 65%, rgba(196, 212, 232, 0.25), transparent 70%);
+    filter: blur(40px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .container { width: 100%; padding: 0 200px; }
+
+  /* Top nav */
+  nav.top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 80px;
+    background: transparent;
+    position: relative;
+    z-index: 2;
+  }
+  nav.top .wordmark { display: inline-block; line-height: 1; }
+  nav.top .wordmark img { display: block; width: 180px; height: auto; }
+  nav.top ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 32px; align-items: center; }
+  nav.top a {
+    color: var(--charcoal); text-decoration: none;
+    font-size: 15px; font-weight: 400;
+  }
+  nav.top a:hover { text-decoration: underline; }
+  nav.top a.is-active { text-decoration: underline; text-underline-offset: 4px; }
+  nav.top .nav-cta {
+    background: var(--charcoal); color: var(--off-white);
+    padding: 8px 16px; border-radius: 6px;
+    box-shadow: var(--inset-shadow); text-decoration: none;
+    font-size: 14px; font-weight: 400;
+  }
+  nav.top .nav-cta:hover { opacity: 0.85; text-decoration: none; }
+
+  /* Page header — matches about.html section-label + heading pattern */
+  .container.content-top { position: relative; z-index: 1; padding-top: 0; }
+  .page-header {
+    padding: 24px 0 16px;
+    max-width: 940px;
+  }
+  .section-label {
+    font-size: 14px; color: var(--muted);
+    margin-bottom: 24px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .section-label::before {
+    content: ''; width: 16px; height: 1px; background: var(--muted);
+  }
+  h1 {
+    font-family: var(--display); font-weight: 500;
+    font-variation-settings: 'opsz' 60;
+    font-size: 50px; line-height: 1.12; letter-spacing: -0.8px;
+    margin: 0; color: var(--charcoal);
+    max-width: 860px;
+  }
+  h1 em {
+    font-style: normal;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  /* Mono-styled small labels (no actual mono font — Plus Jakarta uppercase + tracking) */
+  .ms {
+    font-family: var(--sans); font-weight: 500;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ms.tight { font-size: 10px; letter-spacing: 0.18em; }
+  .ms.accent { color: var(--accent); }
+
+  /* Family lineup card */
+  .lineup {
+    background: var(--cream);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    margin-top: 32px;
+    margin-bottom: 56px;
+    padding: 24px 32px 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .lineup-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 140px;
+    width: 100%;
+  }
+  .figure-btn {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 0 0 auto;
+    text-align: center;
+  }
+  .figure-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 8px;
+    border-radius: 6px;
+  }
+  .figure-silhouette {
+    background-color: var(--charcoal);
+    opacity: 0.78;
+    -webkit-mask-size: contain;
+            mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-position: bottom center;
+            mask-position: bottom center;
+    transition: background-color 180ms ease, opacity 180ms ease;
+  }
+  .figure-btn[data-selected="true"] .figure-silhouette {
+    background-color: var(--accent);
+    opacity: 1;
+  }
+  .figure-btn:hover .figure-silhouette {
+    opacity: 1;
+  }
+  .figure-meta {
+    margin-top: 14px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    min-width: 90px;
+  }
+  .figure-name {
+    font-family: var(--display); font-size: 20px; font-weight: 500;
+    letter-spacing: -0.2px;
+    color: var(--charcoal);
+    transition: color 180ms;
+  }
+  .figure-btn[data-selected="true"] .figure-name { color: var(--accent); }
+  .figure-sub { color: var(--muted); }
+
+  @media (max-width: 768px) {
+    .lineup { padding: 28px 16px 24px; }
+    .lineup-row { gap: 24px; }
+  }
+
+  /* Detail panel */
+  .detail-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px; flex-wrap: wrap;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .detail-eyebrow {
+    margin-bottom: 10px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .detail-eyebrow::before {
+    content: ''; width: 16px; height: 1px; background: var(--muted);
+  }
+  .detail-name {
+    font-family: var(--display); font-size: 52px; font-weight: 500;
+    letter-spacing: -0.9px; line-height: 1.05; margin: 0;
+    color: var(--charcoal);
+  }
+  .detail-name em {
+    color: var(--accent); font-style: normal; font-weight: 500;
+  }
+  .detail-role {
+    font-size: 15px; color: var(--muted); margin-top: 8px;
+  }
+  .detail-stats { display: flex; gap: 32px; align-items: baseline; }
+  .stat-block { display: flex; flex-direction: column; align-items: flex-end; }
+  .stat-num {
+    font-family: var(--display); font-size: 38px; font-weight: 500;
+    letter-spacing: -0.5px; line-height: 1;
+    color: var(--charcoal);
+  }
+  .stat-label { margin-top: 6px; }
+
+  /* Service grid */
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    padding-top: 28px;
+  }
+  @media (max-width: 980px) { .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .service-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  .service-card {
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 20px 22px;
+    background: var(--cream);
+    display: flex; flex-direction: column; gap: 12px;
+    min-width: 0;
+  }
+  .service-head {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 8px 12px; flex-wrap: wrap;
+  }
+  .cadence-pill {
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    padding: 3px 10px;
+    white-space: nowrap;
+    color: rgba(28, 28, 28, 0.82);
+  }
+  .service-title {
+    font-family: var(--display); font-size: 22px; font-weight: 500;
+    letter-spacing: -0.3px; line-height: 1.2; margin: 0;
+    color: var(--charcoal);
+  }
+  .service-org {
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .service-org .lead {
+    font-size: 12px; color: var(--muted);
+  }
+  .service-summary {
+    font-size: 14px; line-height: 1.6; color: var(--fg-2); margin: 0;
+  }
+
+  /* Detail panel bottom spacing */
+  #detail { padding-bottom: 144px; }
+
+  @media (max-width: 768px) {
+    h1 { font-size: 40px; letter-spacing: -0.6px; }
+    .detail-name { font-size: 36px; letter-spacing: -0.5px; }
+    .stat-num { font-size: 28px; }
+  }
+
+  /* Footer */
+  footer {
+    background: var(--charcoal); color: var(--cream);
+    padding: 80px 0;
+    position: relative; z-index: 1;
+  }
+  footer .container {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 64px; align-items: start;
+  }
+  footer .wordmark { display: inline-block; line-height: 1; margin-bottom: 16px; }
+  footer .wordmark img { display: block; width: 240px; height: auto; }
+  footer .tagline { font-size: 14px; line-height: 1.55; color: rgba(250, 241, 223, 0.7); max-width: 360px; }
+  footer h4 {
+    font-family: var(--sans); font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    margin: 0 0 16px; color: var(--cream);
+  }
+  footer ul { list-style: none; margin: 0; padding: 0; }
+  footer li { margin-bottom: 10px; }
+  footer ul a {
+    color: rgba(250, 241, 223, 0.7); text-decoration: none;
+    font-size: 14px;
+  }
+  footer ul a:hover { color: var(--cream); text-decoration: underline; }
+  @media (max-width: 900px) { footer .container { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { footer .container { grid-template-columns: 1fr; gap: 40px; } }
+
+  /* ---------- Hamburger nav (hidden on desktop) ---------- */
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--interactive-border);
+    border-radius: 6px;
+    width: 40px; height: 40px;
+    padding: 0;
+    cursor: pointer;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px;
+  }
+  .nav-toggle:hover { background: var(--hover-tint); }
+  .nav-toggle span {
+    display: block; width: 18px; height: 1.5px;
+    background: var(--charcoal); border-radius: 1px;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  nav.top.is-open .nav-toggle span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  nav.top.is-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  nav.top.is-open .nav-toggle span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+  /* ---------- Mobile (≤760px) ---------- */
+  @media (max-width: 760px) {
+    html, body { overflow-x: hidden; }
+    .container { padding: 0 20px; }
+    nav.top { padding: 18px 20px; position: relative; }
+    nav.top .wordmark img { width: 140px; }
+    .nav-toggle { display: flex; }
+    nav.top ul {
+      display: none;
+      position: absolute;
+      top: calc(100% - 4px);
+      right: 20px;
+      background: var(--cream);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px;
+      min-width: 200px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      z-index: 30;
+    }
+    nav.top.is-open ul { display: flex; }
+    nav.top ul li { width: 100%; }
+    nav.top ul a {
+      display: block; padding: 10px 12px;
+      font-size: 15px; border-radius: 6px;
+    }
+    nav.top ul a:hover { background: var(--hover-tint); text-decoration: none; }
+    nav.top .nav-cta {
+      background: var(--charcoal); color: var(--off-white);
+      padding: 10px 12px; box-shadow: var(--inset-shadow); text-align: center;
+    }
+    h1 { font-size: 36px; letter-spacing: -0.5px; line-height: 1.1; }
+    h2 { font-size: 28px; letter-spacing: -0.4px; line-height: 1.15; margin-bottom: 28px; max-width: none; }
+    .lede { font-size: 16px; max-width: none; }
+    section.block, section.cta-section { padding: 64px 0 0; }
+    footer { padding: 56px 0; }
+    footer .container { gap: 32px; }
+
+    /* Per-page: how-it-works lineup + detail */
+    .lineup { padding: 20px 16px 16px; overflow: hidden; }
+    .lineup-row {
+      gap: 16px;
+      transform: scale(0.5);
+      transform-origin: bottom center;
+      margin-bottom: -30px;
+    }
+    .detail-head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .detail-name { font-size: 34px; letter-spacing: -0.5px; }
+    .detail-stats { gap: 24px; }
+    .stat-block { align-items: flex-start; }
+    .stat-num { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wordmark">
+    <a href="index.html"><img src="logo-lockup.png" alt="Pathways to Family Success." ></a>
+  </div>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="nav-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="members.html">Members</a></li>
+    <li><a href="how-it-works.html" class="is-active">How It Works</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="container content-top">
+
+  <div class="page-header">
+    <div class="section-label" data-field="f-1">How one family actually uses the coalition</div>
+    <h1 data-field="f-2">A single family receives 27 distinct services across the coalition. <em>Select a family member</em> below.</h1>
+  </div>
+
+  <section class="lineup" aria-label="Family lineup">
+    <div class="lineup-row" id="lineup-row"></div>
+  </section>
+
+  <section id="detail" aria-live="polite"></section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <div>
+      <div class="wordmark">
+        <a href="index.html"><img src="logo-lockup-dark.png" alt="Pathways to Family Success." ></a>
+      </div>
+      <div class="tagline">A coordinated afterschool model for Charlottesville's children and families.</div>
+    </div>
+    <div>
+      <h4>About</h4>
+      <ul>
+        <li><a href="about.html">Our story</a></li>
+        <li><a href="members.html">Members</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>How It Works</h4>
+      <ul>
+        <li><a href="how-it-works.html">A family's journey</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="contact.html">Get in touch</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- Data ----------
+  const FAMILY = [
+    { id: 'mom',     name: 'Mom',     age: 32, role: 'Single parent',        scale: 1.0, aspect: 0.844, mask: 'images/masks/person-mask-mom.png?v=3' },
+    { id: 'teen',    name: 'Teen',    age: 14, role: 'High school freshman', scale: 1.2, aspect: 0.840, mask: 'images/masks/person-mask-teen.png?v=3' },
+    { id: 'child',   name: 'Child',   age:  8, role: 'Grade 3',              scale: 1.2, aspect: 0.754, mask: 'images/masks/person-mask-child.png?v=3' },
+    { id: 'toddler', name: 'Toddler', age:  2, role: 'Pre-K age',            scale: 1.2, aspect: 0.606, mask: 'images/masks/person-mask-toddler.png?v=3' },
+  ];
+
+  const ORGS = {
+    uw:   { id: 'uw',   name: 'United Way of Greater Charlottesville',     short: 'UW',   blurb: 'Financial stability · school readiness · community navigation' },
+    rk:   { id: 'rk',   name: 'ReadyKids',                                   short: 'RK',   blurb: 'Early childhood · counseling · family well-being' },
+    vccp: { id: 'vccp', name: 'Virginia Center for Community Partnerships', short: 'VCCP', blurb: 'Mentorship · college and career · STEAM' },
+    cop:  { id: 'cop',  name: 'City of Promise',                             short: 'CoP',  blurb: 'Community school model · family coaching · neighborhood' },
+    n2w:  { id: 'n2w',  name: 'Network2Work @ PVCC',                         short: 'N2W',  blurb: 'Workforce · employer matching · wraparound supports' },
+  };
+
+  const TYPE_LABEL = {
+    navigation:        'Navigation',
+    education:         'Parent education',
+    mentorship:        'Mentorship',
+    counseling:        'Mental health',
+    academic:          'Academic',
+    enrichment:        'Enrichment',
+    'early-childhood': 'Early childhood',
+    coaching:          'Family coaching',
+    workforce:         'Workforce',
+    financial:         'Financial coaching',
+    transportation:    'Transportation',
+    'basic-needs':     'Basic needs',
+  };
+
+  const SERVICE_DETAIL = {
+    mom: [
+      { id:'m1', org:'cop', title:'Family Empowerment Coach', type:'coaching', cadence:'Ongoing · long-term relationship',
+        lead:'City of Promise Family Empowerment Coach',
+        summary:'A long-term coach who walks alongside the family. Sets goals, tracks progress, helps with school enrollment, paperwork, and the connections to other partners. The single relationship that knows the whole picture.' },
+      { id:'m2', org:'cop', title:'Dreambuilders', type:'financial', cadence:'Full school year · 36–38 weeks',
+        lead:'City of Promise Director of Parent Engagement',
+        summary:'A year-long wraparound program that coaches parents toward self-sufficiency, with a $5,000 stipend. Covers financial planning, employment, education, and homeownership. 78% of participants increase self-sufficiency and complete their goals. A tiered second year is available with a $2,000 stipend.' },
+      { id:'m3', org:'uw',  title:'Family Investment Program', type:'financial', cadence:'Monthly 1:1 · multi-year',
+        lead:'United Way financial coach',
+        summary:'High-touch financial coaching: savings plans, debt paydown, credit repair, matched emergency savings, and downpayment assistance. Of 15 families enrolled last year, 7 reached homeownership.' },
+      { id:'m4', org:'uw',  title:'Pathways Community Resource Hotline', type:'navigation', cadence:'As needed',
+        lead:'United Way Pathways navigator',
+        summary:'One phone number for utility assistance, food access, childcare subsidies, and emergency housing. Routes Mom to the right local agency without her having to know which one to call.' },
+      { id:'m5', org:'n2w', title:'Career navigator + employer match', type:'workforce', cadence:'Weekly check-ins · until placed',
+        lead:'Network2Work career and life coach',
+        summary:"A dedicated navigator helps Mom move from a part-time gig to a full-time role through the N2Work platform. Every position pays at least $12.50/hr and doesn't require a degree. Nearly 70% of program job-seekers land a job." },
+      { id:'m6', org:'uw',  title:'Driving Lives Forward', type:'transportation', cadence:'One-time purchase · credit-building loan',
+        lead:'United Way + Virginia National Bank + Carter Myers Automotive',
+        summary:'Helps Mom buy a reliable used car (typically ~$12K, often a 2016 compact SUV) with loan-readiness coaching and insurance setup. Without a car, the new full-time job is logistically impossible.' },
+      { id:'m7', org:'rk',  title:'Healthy Families home visiting', type:'early-childhood', cadence:'Weekly · since Toddler was born',
+        lead:'ReadyKids Family Support Worker',
+        summary:'Same Family Support Worker each week. Developmental milestones, parenting coaching, and the connections that pulled the family into the rest of the coalition. Offered in English, Spanish, Dari, or Pashto.' },
+    ],
+
+    teen: [
+      { id:'t1', org:'vccp', title:'Starr Hill Pathways mentoring', type:'mentorship', cadence:'Weekly · in-school · school year',
+        lead:'Starr Hill Pathways mentor (UVA student or community partner)',
+        summary:'Small-group, in-school mentoring focused on self-efficacy and growth mindset. Same mentor across multiple years. The continuity is the program. Free, with transportation and meals provided.' },
+      { id:'t2', org:'vccp', title:'Summer career pathways program', type:'enrichment', cadence:'Multi-week · summer · on UVA grounds',
+        lead:'Starr Hill staff + UVA and PVCC pathway partners',
+        summary:'Scholars explore 17 career pathways through summer programming on UVA grounds, capped by a student project expo. 9th-graders use the summer to prepare for paid 10th-grade internships.' },
+      { id:'t3', org:'vccp', title:'Academic tutoring', type:'academic', cadence:'In-school day + evening virtual',
+        lead:'UVA student tutors',
+        summary:"Free tutoring during the school day in person, and virtual tutoring in the evenings. Available in scholars' first languages when needed." },
+      { id:'t4', org:'vccp', title:'College access + SAT prep', type:'academic', cadence:'Ongoing · spring intensives',
+        lead:'Starr Hill Pathways college counselor',
+        summary:'SAT prep, college planning, financial-aid workshops, and one-on-one counseling. Builds toward a shortlist and serious post-secondary planning by senior year.' },
+      { id:'t5', org:'vccp', title:'Paid summer internship', type:'enrichment', cadence:'Summer · between 10th and 11th grade',
+        lead:'Starr Hill Pathways + local employer partner',
+        summary:'A real paid placement at a local business, often the first paycheck. Builds career exposure, professional networks, and a tangible reason for the academic work.' },
+      { id:'t6', org:'cop',  title:'Tour of the Town', type:'enrichment', cadence:'Field trips throughout the year',
+        lead:'City of Promise Community School Coordinator',
+        summary:'Career-exposure field trips to local employers and institutions: UVA Surgery, the Fontaine Fire Department, Kiwanis Club, Willow Tree, Getting Word. Designed for kids to see what their lives could look like.' },
+      { id:'t7', org:'rk',   title:'Inside Out trauma counseling', type:'counseling', cadence:'Weekly · long-term',
+        lead:'ReadyKids licensed clinician',
+        summary:"Trauma-focused therapy that families can stay in for as long as they need it, with no artificial endpoint. Mom is informed; the space is explicitly Teen's." },
+    ],
+
+    child: [
+      { id:'c1', org:'cop', title:'Afterschool literacy tutoring', type:'academic', cadence:'After school · at Trailblazer',
+        lead:'City of Promise + Virginia Literacy Partnerships tutor',
+        summary:'In-school literacy tutoring at Trailblazer Elementary, in small groups or 1:1, focused on fluency and comprehension. Snacks provided from the on-site pantry.' },
+      { id:'c2', org:'cop', title:'Westhaven Walks', type:'transportation', cadence:'Every school day since fall 2024',
+        lead:'City of Promise community school staff',
+        summary:'A staffed walking bus to and from Trailblazer for kids in the Westhaven neighborhood, after CCS created "Family Responsibility Zones" that cut their bus access. 104 days last school year were rain, snow, or below freezing.' },
+      { id:'c3', org:'cop', title:'On-site food pantry', type:'basic-needs', cadence:'Daily access · holiday bags during breaks',
+        lead:'City of Promise + Emergency Food Network',
+        summary:'A dry and refrigerated food pantry inside Trailblazer Elementary. 40 students access it daily; 30 holiday bags went home over winter break. Coordinated with CCS so students never have to leave the building.' },
+      { id:'c4', org:'cop', title:'Summer tutoring + YMCA', type:'academic', cadence:'Summer · weekday mornings',
+        lead:'Trailblazer + UVA staff',
+        summary:'A summer literacy program that staves off the "summer slide" of otherwise 10+ unstructured weeks. Participation also unlocks YMCA enrollment, easing the childcare burden on working parents.' },
+      { id:'c5', org:'cop', title:'Community School Coordinator', type:'coaching', cadence:'Embedded in school · daily presence',
+        lead:'City of Promise Community School Coordinator',
+        summary:'A trusted adult embedded inside Trailblazer who knows the child, the teachers, and the family. The bridge between school routines and home life. CoP staff are embedded in 6 of 10 Charlottesville City Schools.' },
+      { id:'c6', org:'rk',  title:'School-based counseling', type:'counseling', cadence:'Weekly · in-school',
+        lead:'ReadyKids clinician',
+        summary:'Counseling sessions during the school day, with no transportation barrier and no missed instruction. Teacher and clinician coordinate on emotional regulation and peer conflict.' },
+      { id:'c7', org:'uw',  title:'Santa Fund for Schoolkids', type:'basic-needs', cadence:'Annual · back-to-school',
+        lead:'United Way + The Daily Press + NewsRadio WINA',
+        summary:'A campaign running since 1896 that covers clothing, shoes, glasses, and backpacks for kids whose families would otherwise have to choose between supplies and rent. Raised ~$260,000 last year.' },
+    ],
+
+    toddler: [
+      { id:'d1', org:'rk',  title:'Healthy Families home visiting', type:'early-childhood', cadence:'Weekly · since birth',
+        lead:'Same ReadyKids Family Support Worker',
+        summary:"The same Family Support Worker since Toddler was born. Two years of weekly visits. Developmental check-ins, parent-child play coaching, and the trusted person who refers the family to everything else." },
+      { id:'d2', org:'rk',  title:'ReadySteps playgroups', type:'early-childhood', cadence:'Weekly · in-neighborhood',
+        lead:'ReadyKids early-learning facilitator',
+        summary:'Weekly early-learning playgroups held in neighborhoods across Charlottesville and Albemarle. Parents stay during sessions, building peer support alongside school-readiness skills.' },
+      { id:'d3', org:'uw',  title:'Go2Grow childcare matching', type:'navigation', cadence:'As needed',
+        lead:'United Way / Ready Region Blue Ridge',
+        summary:"United Way's childcare-search platform. Mom can find and apply to high-quality childcare without making twenty phone calls. 3,637 applications flowed through it last year." },
+      { id:'d4', org:'uw',  title:'Early Learner Scholarship', type:'early-childhood', cadence:'Annual · renewable',
+        lead:'United Way of Greater Charlottesville',
+        summary:'A childcare scholarship that closes the gap between what childcare costs (full-day infant care averages $20,000/year, more than in-state UVA tuition) and what Mom can pay. 569 scholarships went out last year.' },
+      { id:'d5', org:'uw',  title:'Head Start full-day care', type:'early-childhood', cadence:'Mon–Fri · full day',
+        lead:'United Way (regional operator) + Ready Region partner center',
+        summary:"Full-day Head Start care will cover Mom's working hours once Toddler turns three. United Way took on the regional Head Start operator role in 2025 across five counties." },
+      { id:'d6', org:'cop', title:'Nurturing Neighborhood volunteers', type:'coaching', cadence:'Ongoing · 4–5 volunteers per family',
+        lead:'City of Promise volunteer coordinator',
+        summary:"A volunteer initiative that builds an \"extended family\" around participating households. 4–5 volunteers each contribute non-monetary support: rides, meals, mentoring, weekend outings. Piloted with two families starting early 2025." },
+    ],
+  };
+
+  // ---------- Helpers ----------
+  function heightForAge(age) {
+    const min = 80, max = 220, ageMin = 2, ageMax = 32;
+    const t = Math.max(0, Math.min(1, (age - ageMin) / (ageMax - ageMin)));
+    return min + t * (max - min);
+  }
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  // ---------- Render: lineup ----------
+  function renderLineup(selId) {
+    const ordered = [...FAMILY].sort((a, b) => a.age - b.age);
+    const row = document.getElementById('lineup-row');
+    row.innerHTML = ordered.map(p => {
+      const h = heightForAge(p.age) * (p.scale ?? 1) * 0.7875;
+      const w = h * (p.aspect ?? 0.62);
+      return `
+        <button type="button" class="figure-btn" data-id="${p.id}" data-selected="${p.id === selId}" aria-pressed="${p.id === selId}">
+          <div class="figure-silhouette" style="
+            width: ${w}px; height: ${h}px;
+            -webkit-mask-image: url('${p.mask}');
+                    mask-image: url('${p.mask}');"></div>
+          <div class="figure-meta">
+            <div class="figure-name">${esc(p.name)}</div>
+            <div class="ms tight figure-sub">${esc(p.role)}</div>
+          </div>
+        </button>`;
+    }).join('');
+    row.querySelectorAll('.figure-btn').forEach(btn => {
+      btn.addEventListener('click', () => select(btn.dataset.id));
+    });
+  }
+
+  // ---------- Render: detail ----------
+  function renderDetail(selId) {
+    const person = FAMILY.find(p => p.id === selId);
+    const services = SERVICE_DETAIL[selId] || [];
+    const orgs = [...new Set(services.map(s => s.org))];
+
+    const cards = services.map(s => {
+      const org = ORGS[s.org];
+      return `
+        <article class="service-card">
+          <header class="service-head">
+            <span class="ms tight">${esc(TYPE_LABEL[s.type] || s.type)}</span>
+            <span class="ms tight cadence-pill">${esc(s.cadence)}</span>
+          </header>
+          <h3 class="service-title">${esc(s.title)}</h3>
+          <div class="service-org">
+            <span class="ms tight accent">${esc(org.short)} · ${esc(org.name)}</span>
+            <span class="lead">Delivered by: ${esc(s.lead)}</span>
+          </div>
+          <p class="service-summary">${esc(s.summary)}</p>
+        </article>`;
+    }).join('');
+
+    document.getElementById('detail').innerHTML = `
+      <div class="detail-head">
+        <div>
+          <div class="ms detail-eyebrow">What the system provides for</div>
+          <h2 class="detail-name">${esc(person.name)}<em>, age ${person.age}</em></h2>
+          <div class="detail-role">${esc(person.role)}</div>
+        </div>
+        <div class="detail-stats">
+          <div class="stat-block">
+            <span class="stat-num">${services.length}</span>
+            <span class="ms tight stat-label">Active services</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num">${orgs.length}</span>
+            <span class="ms tight stat-label">Orgs involved</span>
+          </div>
+        </div>
+      </div>
+      <div class="service-grid">${cards}</div>
+    `;
+  }
+
+  // ---------- Selection ----------
+  function select(id) {
+    document.querySelectorAll('.figure-btn').forEach(btn => {
+      const sel = btn.dataset.id === id;
+      btn.dataset.selected = sel;
+      btn.setAttribute('aria-pressed', sel);
+    });
+    renderDetail(id);
+  }
+
+  // ---------- Init ----------
+  const INITIAL = 'teen';
+  renderLineup(INITIAL);
+  renderDetail(INITIAL);
+
+  // ---------- Nav toggle ----------
+  document.querySelectorAll('nav.top .nav-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const nav = btn.closest('nav');
+      const open = nav.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+  document.addEventListener('click', e => {
+    document.querySelectorAll('nav.top.is-open').forEach(nav => {
+      if (!nav.contains(e.target)) {
+        nav.classList.remove('is-open');
+        nav.querySelector('.nav-toggle')?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script>
+
+
+
+</body>
+</html>
